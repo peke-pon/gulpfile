@@ -42,7 +42,7 @@ const imageminOption = [
 
 // HTMLコンパイル
 function html() {
-	return src('src/views/*.pug')
+	return src(['src/views/**/*.pug', '!src/views/_*.pug'])
 		.pipe(pug({
 			basedir: 'public/',
 			pretty: true
