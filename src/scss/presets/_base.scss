@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 html {
   font-size: 10px;
 }
@@ -10,9 +12,7 @@ body {
 
 a { text-decoration: none; }
 
-img { vertical-align: bottom; 
-  border:none;
-}
+img { vertical-align: bottom; }
 
 input, textarea, button {
   appearance: none;

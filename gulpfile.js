@@ -43,7 +43,7 @@ const imageminOption = [
 
 // HTMLコンパイル
 function html() {
-	return src(['src/views/**/*.pug', '!src/views/_*.pug'])
+	return src(['src/views/**/*.pug', '!src/views/**/_*.pug'])
 		.pipe(pug({
 			basedir: 'public/',
 			pretty: true
@@ -53,7 +53,7 @@ function html() {
 
 // CSSコンパイル
 function css() {
-	return src('src/scss/**/*.scss')
+	return src('src/scss/style.scss')
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: <%= error.message %>")
 		}))
