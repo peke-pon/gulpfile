@@ -15,7 +15,8 @@ const { src, dest, watch, parallel } = require('gulp'),
 	autoprefixer = require('autoprefixer'),
 	rename = require('gulp-rename'),
 	cleanCSS = require('gulp-clean-css'),
-	babel = require('gulp-babel');
+	babel = require('gulp-babel'),
+	browserSync = require('browser-sync').create();
 
 // CSSオプション
 const plugin = [
@@ -50,7 +51,6 @@ function html() {
 		.pipe(dest('public/'));
 }
 
-
 // CSSコンパイル
 function css() {
 	return src('src/scss/**/*.scss')
@@ -63,7 +63,7 @@ function css() {
 		.pipe(dest('public/css'));
 };
 
-// JSコンパイル
+// JSトランスパイル
 function js() {
 	return src(['src/**/*.js'])
 		.pipe(concat('index.js'))
@@ -102,12 +102,27 @@ function minjs () {
 		.pipe(dest('public/js'));
 };
 
+// ブラウザ同期
+function serve () {
+	return browserSync.init({
+		server: {
+			baseDir: "./public/",
+			index: 'index.html'
+		}
+	});
+};
+
+function reload () {
+	browserSync.reload();
+}
+
 // ファイルチェック開始
 exports.default = function () {
 	watch(['src/views/**/*.pug'], html);
-	watch(['src/scss/**/*.scss'], css);
-	watch(['src/**/*.js'], js);
-	watch(['src/images/*'], copy);
+	watch(['src/scss/**/*.scss'], css).on("change", reload);
+	watch(['src/scripts/**/*.js'], js).on("change", reload);
+	watch(['src/images/*'], copy).on("change", reload);
+	watch(["public/**/*.*"], serve).on("change", reload);
 };
 
 // 圧縮実行

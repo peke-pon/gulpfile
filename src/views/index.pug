@@ -1,9 +1,9 @@
 extends presets/_layout
 
-append meta
+block meta
   - var title= "title";
   - var description= "dscription";
-  - var keywords= "word1,word2,word3";
+  - var keywords= "keyword";
 
 block style
   link(rel="stylesheet" href="css/style.css")
@@ -11,6 +11,7 @@ block style
 block content
   .container
     .innner
+      p.text 自動化実験
 
 block script
   script(src="javascripts/index.js")
