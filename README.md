@@ -11,6 +11,7 @@ const { src, dest, watch, parallel } = require('gulp'),
 	pngquant = require('imagemin-pngquant'),
 	concat = require('gulp-concat'),
 	uglify = require('gulp-uglify'),
+	pug = require('gulp-pug'),
 	sass = require('gulp-sass'),
 	sassGlob = require('gulp-sass-glob'),
 	postcss = require('gulp-postcss'),
@@ -19,7 +20,8 @@ const { src, dest, watch, parallel } = require('gulp'),
 	autoprefixer = require('autoprefixer'),
 	rename = require('gulp-rename'),
 	cleanCSS = require('gulp-clean-css'),
-	babel = require('gulp-babel');
+	babel = require('gulp-babel'),
+	browserSync = require('browser-sync').create();
 
 // CSSオプション
 const plugin = [
@@ -44,9 +46,19 @@ const imageminOption = [
 		{ cleanupIDs: false }]
 	})];
 
+// HTMLコンパイル
+function html() {
+	return src(['src/views/**/*.pug', '!src/views/**/_*.pug'])
+		.pipe(pug({
+			basedir: 'public/',
+			pretty: true
+		}))
+		.pipe(dest('public/'));
+}
+
 // CSSコンパイル
 function css() {
-	return src('src/scss/**/*.scss')
+	return src('src/scss/style.scss')
 		.pipe(plumber({
 			errorHandler: notify.onError("Error: <%= error.message %>")
 		}))
@@ -56,14 +68,14 @@ function css() {
 		.pipe(dest('public/css'));
 };
 
-// JSコンパイル
+// JSトランスパイル
 function js() {
 	return src(['src/**/*.js'])
-		.pipe(concat('script.js'))
+		.pipe(concat('index.js'))
 		.pipe(babel({
 			presets: ['@babel/preset-env']
 		}))
-		.pipe(dest('public/js'));
+		.pipe(dest('public/scripts'));
 }
 
 // 画像コピー
@@ -95,11 +107,27 @@ function minjs () {
 		.pipe(dest('public/js'));
 };
 
+// ブラウザ同期
+function serve () {
+	return browserSync.init({
+		server: {
+			baseDir: "./public/",
+			index: 'index.html'
+		}
+	});
+};
+
+function reload () {
+	browserSync.reload();
+}
+
 // ファイルチェック開始
 exports.default = function () {
-	watch(['src/scss/**/*.scss'], css);
-	watch(['src/**/*.js'], js);
-	watch(['src/images/*'], copy);
+	watch(['src/views/**/*.pug'], html);
+	watch(['src/scss/**/*.scss'], css).on("change", reload);
+	watch(['src/scripts/**/*.js'], js).on("change", reload);
+	watch(['src/images/*'], copy).on("change", reload);
+	watch(["public/**/*.*"], serve).on("change", reload);
 };
 
 // 圧縮実行
