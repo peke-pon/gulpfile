@@ -5,16 +5,13 @@ block meta
   - var description= "dscription";
   - var keywords= "keyword";
 
-block style
+append style
   link(rel="stylesheet" href="css/style.css")
 
 block content
-  .container
-    .innner
-
-block script
-  script(src="javascripts/index.js")
 
 block footer
-  .footer-wrapper
-    .footer-inner
+  include modules/_footer
+
+block script
+  script(src="scripts/index.js")
