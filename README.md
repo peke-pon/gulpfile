@@ -1,4 +1,63 @@
-## 静的サイト用テンプレート
+## 静的サイト用テンプレート【2020年度版】
+
+gulpの設定をしようと検索をしたのですが、gulp3のバージョン違いの情報しか
+見つからなかったので公式ドキュメントを元に基本的な機能を実装してみました。
+(gulp.taskはv4で非推奨になっています)
+
+## gulpのインストール
+
+```bash
+npm install gulp-cli -g
+npm install gulp -D
+npm install
+```
+## gulpコマンド
+
+### Pug,Sass,JavaScript、画像コピー,ライブリロード
+
+```
+npx　gulp
+```
+
+### CSS圧縮,Javascript圧縮、画像圧縮
+
+```
+npx minify
+```
+
+### ①pug->html変換　
+
+srcフォルダのview内のpugファイルを編集すると自動でコンパイル。
+コンパイルされたhtmlはpublicフォルダへコピーされます。
+
+### ②sass->css変換
+
+srcフォルダのsass内のファイルを編集すると自動でコンパイル。
+コンパイルされたcssはpublicフォルダへコピーされます。
+
+### ③cssフォーマット
+
+自動でcssのフォーマットをしてくれます。
+cssプロパティの順番を入れ替えて、コードを整理します。
+さらにautoplefixerでプレフィックスの付加をする。
+(対応範囲はpackage.json内のbrowserslistで設定)
+
+### ④JavaScriptファイル
+
+JavaScriptを分割管理したものを結合してトランスパイルする。
+さらに、圧縮してsrcフォルダのpublic/scriptsへコピーされます。
+
+### ⑤画像圧縮
+
+imageminでの圧縮。元ファイルを残すために、srcフォルダのimagesへ入れると
+publicへコピーされるようになっています。圧縮コマンドを実行するとpublicフォルダ内の
+画像が圧縮されます。画像のクオリティーはオプションを変更してください
+
+### ⑥ライブリロード
+
+browserSyncを使用してのライブリロード。
+公式ドキュメントがgulp.taskだったのでfunctionへ変更。
+普段live-serverを使用しているので、只今実験中です。
 
 ## gulpfile
 
@@ -132,18 +191,4 @@ exports.default = function () {
 
 // 圧縮実行
 exports.minify = parallel(imageminify, minjs, mincss);
-```
-
-## gulpコマンド
-
-### Sass->CSS、JavaScriptトランスパイル、画像コピー
-
-```
-npx　gulp
-```
-
-### CSS圧縮,Javascript圧縮、画像圧縮
-
-```
-npx minify
 ```
