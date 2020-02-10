@@ -1,0 +1,33 @@
+@charset "UTF-8";
+// ==================================
+// 基本設定
+// ==================================
+
+// フォント設定 ---------------------
+  $font-sans:  Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;;
+  $font-serif: Georgia,游明朝,"Yu Mincho",YuMincho,"Hiragino Mincho ProN","Hiragino Mincho Pro",HGS明朝E,メイリオ,Meiryo,serif;
+  $font-mac:   'Hiragino Kaku Gothic Pro','ヒラギノ角ゴ Pro W3','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
+  $font-noto:  'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+  // $font-typo: ;
+
+// サイト幅 -------------------------
+  $width-base: 1280px; // サイトサイズ
+  $width-main: 860px; // コンテンツ
+  $width-side: 390px; // サイドバー
+
+// カラー設定 -----------------------
+  // $color-main: ;
+  // $color-key: ;
+  // $color-sub: ;
+  // $color-text: ;
+  // $color-link: ;
+
+// ブレイクポイント ------------------
+  $sp: 640;
+  $tb: 768;
+  $pc: 1280;
+
+// その他 -------------------------
+
+// シャドー
+$color-shadow: 0 3px 6px rgba(119, 119, 119, 0.096);

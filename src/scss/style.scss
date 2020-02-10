@@ -1,4 +1,6 @@
 
-@import 'presets/base', 'presets/variable', 'presets/mixin', 'presets/function';
+@import 'presets/**/*.scss';
 
 @import 'modules/**/*.scss';
+
+@import 'pages/**/*.scss';

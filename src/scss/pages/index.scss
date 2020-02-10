@@ -1,0 +1,23 @@
+.wrapper {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding-left: 30px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 100px;
+}
+
+@include mq($sp) {
+  .wrapper {
+    padding-left: 7%;
+    padding-right: 7%;
+    padding-top: 100px;
+  }
+  .container {
+    margin-top: 30px;
+  }
+
+}
